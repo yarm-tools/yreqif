@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { parse as fast_xml_parse, j2xParser} from "fast-xml-parser";
+import {XMLParser, XMLBuilder, XMLValidator} from "fast-xml-parser";
 
 import { ToArray, toJSON } from "../utils";
 
@@ -15,13 +15,13 @@ import { Identifiable } from "../reqif-naive/basic/ReqIFBasicClasses";
 //TODO: Instead of global index create new for this exact file
 let INDEX: yIndex = {};
 
+const fast_xml_parse =  new XMLParser();
+
 //-------------------------------------
 
 export function yparse(xml: string) {
     //parsing source
-    return fast_xml_parse(xml, {
-        ignoreAttributes : false,
-    });
+    return fast_xml_parse.parse(xml);
 }
 
 //----------------------
@@ -188,7 +188,7 @@ export function exportXML(yreqif: yReqIF): string {
         indentBy: "  "
     };
 
-    var parser = new j2xParser(defaultOptions);
+    var builder = new XMLBuilder(defaultOptions);
 
     var xmlRepresentation = prepareXMLRepresentation(yreqif.reqif);
     // console.log("------ xmlRepresentation:", toJSON(xmlRepresentation));
@@ -197,6 +197,6 @@ export function exportXML(yreqif: yReqIF): string {
 
     }
 
-    var xml = parser.parse(xmlRepresentation);
+    var xml = builder.build(xmlRepresentation);
     return xml;
 }
