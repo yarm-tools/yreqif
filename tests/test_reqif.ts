@@ -15,13 +15,17 @@ npm install -g fast-xml-parser
 import { toJSON } from "../src/utils";
 import { yparse, importXML } from "../src/yreqif/yparser";
 
-import { sample_xml, sample_xml1, sample_xml2 } from "./sample_xml";
+import { sample_xml1 } from "./samples/sample_xml1";
 
-let data = yparse(sample_xml1); //sample_xml2 is not supported yet
+let data_to_parse = sample_xml1;
+
+let data = yparse(data_to_parse); //sample_xml2 is not supported yet
 
 console.log(toJSON(data));
 
 let yreqif = importXML(data);
+
+console.log(yreqif);
 
 //Output parsed structure
 console.log(yreqif.to_JSON());

@@ -15,11 +15,18 @@ import { Identifiable } from "../reqif-naive/basic/ReqIFBasicClasses";
 //TODO: Instead of global index create new for this exact file
 let INDEX: yIndex = {};
 
-const fast_xml_parse =  new XMLParser();
 
 //-------------------------------------
 
 export function yparse(xml: string) {
+    const options = {
+        ignoreAttributes: false,
+        attributeNamePrefix : "@_",
+        preserveOrder: true
+    };
+    
+    const fast_xml_parse =  new XMLParser();
+
     //parsing source
     return fast_xml_parse.parse(xml);
 }

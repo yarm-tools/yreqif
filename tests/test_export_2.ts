@@ -1,7 +1,7 @@
 import { toJSON } from "../src/utils";
 import { yparse, importXML, exportXML } from "../src/yreqif/yparser";
 
-import { sample_xml, sample_xml1, sample_xml2 } from "./sample_xml";
+import { sample_xml1 } from "./samples/sample_xml1";
 
 let data = yparse(sample_xml1); //sample_xml2 is not supported yet
 
